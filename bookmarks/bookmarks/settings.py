@@ -32,6 +32,12 @@ EMAIL_SUBJECT_PREFIX = u"django"
 EMAIL_USE_TLS= True
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
+# AUTHENCIATE
+AUTHENTICATION_BACKENDS = (
+    "django.contrib.auth.backends.ModelBackend",
+    "account.authentication.EmailAuthBackend",
+)
+
 
 # MEDIA
 MEDIA_URL = '/media/'
