@@ -16,6 +16,9 @@ from django.core.urlresolvers import reverse_lazy
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+# thumbnail
+THUMBNAIL_DEBUG = True
+
 # Login added by me
 LOGIN_REDIRECT_URL = reverse_lazy('dashboard')
 LOGIN_URL = reverse_lazy('login')
@@ -36,8 +39,15 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend",
     "account.authentication.EmailAuthBackend",
+    "social.backends.facebook.Facebook2OAuth2",
+    "social.backends.twitter.TwitterOAuth",
 )
 
+SOCIAL_AUTH_FACEBOOK_SECRET = '85b07600d5c5878199f759d41e7a772b'
+SOCIAL_AUTH_FACEBOOK_KEY = '292344351449691'
+
+SOCIAL_AUTH_TWITTER_KEY = ''
+SOCIAL_AUTH_TWITTER_SECRET = ''
 
 # MEDIA
 MEDIA_URL = '/media/'
@@ -59,6 +69,9 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = (
     'account',
+    "images",
+    "sorl.thumbnail",
+    "social.apps.django_app.default",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

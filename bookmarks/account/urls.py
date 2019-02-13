@@ -2,6 +2,7 @@ from django.conf.urls import url
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
+from django.conf.urls import include
 
 # import pdb
 # pdb.set_trace()
@@ -29,7 +30,10 @@ urlpatterns = [
 
     # register
     url(r'^register/$', views.register, name="register"),
-    url(r'^edit/$', views.edit, name="edit")
+    url(r'^edit/$', views.edit, name="edit"),
+
+    # authentication via social media
+    url(r'social-auth/', include('social.apps.django_app.urls', namespace="social")),
 ]
 
 if settings.DEBUG:
