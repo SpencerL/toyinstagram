@@ -73,6 +73,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
+    "actions",
     'account',
     "images",
     "sorl.thumbnail",
