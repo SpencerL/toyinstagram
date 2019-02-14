@@ -55,6 +55,8 @@ def dashboard(request):
 
 @login_required
 def edit(request):
+    # import pdb
+    # pdb.set_trace()
     if request.method == 'POST':
         user_form = UserEditForm(instance=request.user, data=request.POST)
         profile_form = ProfileEditForm(instance=request.user.profile, data=request.POST,
@@ -71,28 +73,3 @@ def edit(request):
         profile_form = ProfileEditForm(instance=request.user.profile)
     
     return render(request, 'account/edit.html', {"user_form": user_form, "profile_form": profile_form})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
