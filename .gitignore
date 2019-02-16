@@ -1,5 +1,7 @@
 env/
 *.pyc
 db.sqlite3
-media/
 *.jpg
+*.conf
+*.ini
+*.sh

@@ -151,9 +151,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
-STATIC_URL = '/static/'
-
-# Log
+STATIC_URL = '/static/' 
+STATIC_ROOT = os.path.join(BASE_DIR, "static/")
+# Log 
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
