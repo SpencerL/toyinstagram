@@ -14,7 +14,7 @@
         <div class="image-info">
                 <div>
                     <span class="count">
-                        <span class="total">{{ total_likes }}</span>
+                        <span id='like' class="total">{{ total_likes }}</span>
                         like{{ total_likes|pluralize }}
                     </span>
                     <span class="count">
@@ -48,26 +48,71 @@
 {% block domready %}
     $('a.like').click(function(e){
         e.preventDefault();
-        $.post('{% url "images:like" %}',
+        $.post(
+            '{% url "images:like" %}',
             {
-                id: $(this).data('id'),
-                action: $(this).data('action')
+            id: $(this).data('id'),
+            action: $(this).data('action')
             },
-            function(data){
-                if (data['status'] == 'ok')
-                {
-                    var previous_action = $('a.like').data('action');
+        function(data){
+            if (data['status'] == 'ok'){
+                var previous_action = $('a.like').data('action');
 
-                    // toggle data-action
-                    $('a.like').data('action', previous_action == 'like' ? 'unlike' : 'like');
-                    // toggle link text
-                    $('a.like').text(previous_action == 'like' ? 'Unlike' : 'Like');
+                // toggle data-action
+                $('a.like').data('action', previous_action == 'like' ? 'unlike' : 'like');
+                // toggle link text
+                $('a.like').text(previous_action == 'like' ? 'Unlike' : 'Like');
 
-                    // update total likes
-                    var previous_likes = parseInt($('span.count .total').text());
-                    $('span.count .total').text(previous_action == 'like' ? previous_likes + 1 : previous_likes - 1);
-                }
+                // update total likes
+                var previous_likes = parseInt($('#like').text());
+                $('#like').text(previous_action == 'like' ? previous_likes + 1 :
+                previous_likes - 1);
+            }
         });
-
     });
+
+
+    // $('a.like').click(function(e){
+    //     e.preventDefault();
+    //     $.post('{% url "images:like" %}',
+    //         {
+    //             id: $(this).data('id'),
+    //             action: $(this).data('action')
+    //         },
+    //         function(data){
+    //             if (data['status'] == 'ok')
+    //             {
+    //                 var previous_action = $('a.like').data('action');
+
+    //                 // toggle data-action
+    //                 $('a.like').data('action', previous_action == 'like' ? 'unlike' : 'like');
+    //                 // toggle link text
+    //                 $('a.like').text(previous_action == 'like' ? 'Unlike' : 'Like');
+
+    //                 // update total likes
+
+    //                 // -----------  debug ----------
+    //                 // var span_count_total = $('span.count .total');
+    //                 // alert("span_count_total: " + span_count_total)
+    //                 // alert("type of span_count_total: " + typeof(span_count_total));
+
+    //                 // var element0 = span_count_total[0]
+    //                 // alert("element 0: " + element0)
+    //                 // alert("type of element0: " + typeof(element0));
+
+    //                 // var element1 = span_count_total[1]
+    //                 // alert("element 1: " + element1)
+    //                 // alert("type of element1: " + typeof(element1));
+
+    //                 // -----------  debug ----------
+
+    //                 var previous_likes = parseInt($('span.count').text());
+    //                 
+    //                 // $('span.count.total_likes').text(previous_action == 'like' ? previous_likes + 1 : previous_likes - 1);
+    //                 $('span.count').text(previous_action == 'like' ? previous_likes + 1 : previous_likes - 1);
+    //                 alert("done.")
+    //             }
+    //     });
+
+    // });
 {% endblock %}
